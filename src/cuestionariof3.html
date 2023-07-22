@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario con 5 preguntas de selección múltiple</title>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>WebDesing</h1>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-menu-item"><a href="index.html" class="nav-menu-link nav-link ">Inicio</a></li>
+          <li class="nav-menu-item"><a href="mediaqueries.html" class="nav-menu-link nav-link ">Media Queries</a></li>
+          <li class="nav-menu-item"><a href="about.html" class="nav-menu-link nav-link ">Mockup</a></li>
+          <li class="nav-menu-item"><a href="contact.html" class="nav-menu-link nav-link ">Contactanos</a></li>
+          <li class="nav-menu-item"><a href="Cuestionariof3.html" class="nav-menu-link nav-link ">Cuestionario Fase3</a></li>
+          
+         </ul>
+      </nav>
+    </div>
+  </header>
+  <h1>RESPONDA LAS SIGUIENTES PREGUNTAS PARA EVALUAR SU CONOCIMIENTO DE LA FASE 3</h1>
+  <form id="formulario">
+    <p>¿Cuál es la principal ventaja de utilizar CSS Grid para el diseño del layout en comparación con otros métodos de posicionamiento?</p>
+    <input type="radio" name="r1" value="opcion1" required>
+        <label for="r1">Permite crear diseños complejos y flexibles de manera más sencilla.<br>
+    <input type="radio" name="r1"" value="opcion2">
+        <label for="r1">Mejora la accesibilidad y la experiencia del usuario.<br>
+    <input type="radio" name="r1" value="opcion3">
+        <label for="r1">Reduce la necesidad de utilizar reglas de posicionamiento CSS adicionales.<br>
+    <input type="radio" name="r1" value="opcion4">
+            <label for="r1">Todas las anteriores<br>
+    <br>
+
+    <p>En CSS Grid, ¿qué propiedad se utiliza para establecer el tamaño de las filas o columnas de una cuadrícula?</p>
+    <input type="radio" name="r2" value="opcion1" required>
+        <label for="r2">grid-row-gap<br>
+    <input type="radio" name="r2" value="opcion2">
+        <label for="r2">grid-template-columns<br>
+    <input type="radio" name="r2" value="opcion3">
+        <label for="r2">grid-auto-rows<br>
+    <input type="radio" name="r2" value="opcion4">
+        <label for="r2">grid-column-gap<br>
+        <br>
+        
+    <p>¿Cuál de las siguientes afirmaciones sobre Bootstrap es correcta?</p>
+    <input type="radio" name="r3" value="opcion1" required>
+        <label for="r3">Bootstrap es un lenguaje de programación para el desarrollo web.<br>
+    <input type="radio" name="r3" value="opcion2">
+        <label for="r3">Bootstrap solo es compatible con navegadores modernos como Google Chrome y Firefox.<br>
+    <input type="radio" name="r3" value="opcion3">
+        <label for="r3">Bootstrap es un framework de código abierto desarrollado por Twitter para la creación de sitios web y aplicaciones responsivas.<br>
+    <input type="radio" name="r3" value="opcion4">
+        <label for="r3"> Bootstrap solo ofrece estilos prediseñados para tipografías y colores.<br>
+            <br>
+
+    <p> ¿Qué clase se utiliza en Bootstrap para crear un contenedor que centralice su contenido y aplique márgenes laterales automáticos?</p>
+    <input type="radio" name="r4" value="opcion1" required>
+        <label for="r4"> .container-center<br>
+    <input type="radio" name="r4" value="opcion2">
+        <label for="r4"> .container-fluid<br>
+    <input type="radio" name="r4" value="opcion3">
+         <label for="r4">.container-horizontal-center<br>
+    <input type="radio" name="r4" value="opcion4">
+         <label for="r4"> .container<br>
+    <br>
+
+    <p>En Bootstrap, ¿qué clase se utiliza para crear una barra de navegación responsiva que colapsa en un ícono de hamburguesa en dispositivos móviles?</p>
+    <input type="radio" name="r5" value="opcion1" required>
+    <label for="r5"> .navbar-inverse<br>
+    <input type="radio" name="r5" value="opcion2">
+    <label for="r5"> .navbar-toggle<br>
+    <input type="radio" name="r5" value="opcion3">
+    <label for="r5">.navbar-collapse<br>   
+    <input type="radio" name="r5" value="opcion4">
+    <label for="r5"> .navbar-responsive<br>
+    <br><br>
+ 
+    <button type="submit">Enviar respuestas</button>
+</form>
+
+<script>
+   const formulario = document.getElementById('formulario');
+
+ 
+  formulario.addEventListener('submit', function(event) {
+    event.preventDefault(); 
+
+     const respuestasCorrectas = {
+      pregunta1: 'opcion4', 
+      pregunta2: 'opcion2',
+      pregunta3: 'opcion3',
+      pregunta4: 'opcion4',
+      pregunta5: 'opcion3',
+      };
+
+     const respuestasUsuario = {
+      pregunta1: obtenerRespuesta('r1'),
+      pregunta2: obtenerRespuesta('r2'),
+      pregunta3: obtenerRespuesta('r3'),
+      pregunta4: obtenerRespuesta('r4'),
+      pregunta5: obtenerRespuesta('r5'),
+      };
+
+        const puntaje = verificarRespuestas(respuestasCorrectas, respuestasUsuario);
+
+   
+    alert(`Tu puntaje alcanzado es: ${puntaje}`);
+
+    formulario.reset();
+  });
+
+    function obtenerRespuesta(nombrePregunta) {
+    const opciones = document.getElementsByName(nombrePregunta);
+    for (const opcion of opciones) {
+      if (opcion.checked) {
+        return opcion.value;
+      }
+    }
+    return null; 
+  }
+
+  function verificarRespuestas(respuestasCorrectas, respuestasUsuario) {
+    let puntaje = 0;
+    for (const pregunta in respuestasUsuario) {
+      if (respuestasUsuario[pregunta] === respuestasCorrectas[pregunta]) {
+        puntaje++;
+      }
+    }
+    return puntaje;
+  }
+</script>
+</body>
+</html>
